@@ -1,0 +1,123 @@
+body {
+	background-image: url(https://media.diariouno.com.ar/p/f54249878a58173518d1bc7ec8f5814e/adjuntos/298/imagenes/008/806/0008806731/1200x0/smart/perro-callejerojpg.jpg);
+	color: rgb(253, 251, 247);
+	background-size:cover;
+	
+	
+}
+html, body, .vista {
+  height: 100%;
+}
+
+body{
+  display: flex;
+  flex-direction: column;
+}
+
+.footer{
+    background-color: rgba(0, 0, 0, .3);
+    flex-shrink: 0;
+}
+
+
+.formulario {
+	display:flex;
+	justify-content: flex-end;
+	flex-direction:column;
+/* 	width:70%; */
+	
+}
+/*INICIO MENU*/
+.logo {
+	border-radius: 35%;
+}
+.menu {
+    margin:1%;
+    background-color: rgba(0, 0, 0, .3);
+    display: flex;
+    color:#f8f9fa;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+}
+.menu-registro{
+    text-decoration: none;
+    list-style: none;
+    margin-right: 20px;
+    display: flex;
+}
+.menu-registro button{
+    margin-left: 3px;
+    margin-right: 3px;
+}
+li .nav-item{
+    justify-content: flex-end;
+}
+.menu-registro .nav-item a.nav-link.active{
+    text-align: right;
+    color:#f8f9fa;
+    justify-content: flex-end;
+}
+/*FIN MENU*/
+h2 {
+	color: rgb(253, 251, 247);
+	width: 50%;
+	text-align: left;
+	align-items: left;
+	margin: 2px;
+}
+
+.navbar{
+	margin: 0;
+}
+
+nav li .nav-item {
+	justify-content: flex-end;
+}
+
+.formulario-registro {
+	background-color: rgba(12, 4, 4, 0);
+	margin: 2px;
+	max-width: 400px;
+/* 	width: 30%; */
+	padding: 10px;
+	justify-content: left;
+	flex-wrap: wrap;
+	flex-direction: column;
+	align-items: left;
+	border: 2px solid white;
+}
+.formulario-registro .alert{
+	text-align: center;
+	align-items: center;
+	margin: 0 auto;
+	padding: 10px;
+	align-items: center;
+	
+}
+.formulario-registro div label {
+	display: flex;
+	padding: 2%;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.formulario-registro div label input {
+	padding: 2%;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+/* DERECHOS */
+.derechos {
+    padding: 20px 10px;
+    background-color: rgba(0, 0, 0, .3);
+    display: flex;
+    justify-content: space-around;
+  }
+.derechos p {
+    font-size: 12px;
+  }
+
+

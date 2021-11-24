@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="es">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Patitas perdidas</title>
+<link href="/index.css" rel="stylesheet">
+<link rel="icon" href="/imagenes/favicon.ico" type="image/x-icon">
+<script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+	crossorigin="anonymous">
+<!-- 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+<link
+	href="https://fonts.googleapis.com/css2?family=Asap:ital,wght@0,400;0,600;0,700;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+	rel="stylesheet">
+<style type="text/css">
+.contenedor {
+  height: 100%;
+  padding: 5% 0;
+}
+
+h1 {
+  color: #FCFBFA;
+}
+
+.container_foto {
+  background-color: rgba(57, 62, 93, 0.5);
+  backdrop-filter: blur(10px);
+  padding: 0;
+  overflow: hidden;
+  max-width: 350px;
+  margin: 2%;
+  margin-bottom: 1%;
+  margin-top: 1%;
+}
+
+.container_foto article {
+  padding: 10%;
+  position: absolute;
+  bottom: 0;
+  z-index: 1;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+.container_foto h2 {
+  color: #fff;
+  font-weight: 800;
+  font-size: 25px;
+  border-bottom: #fff solid 1px;
+}
+
+.container_foto h4 {
+  color: #fff;
+  font-size: 16px;
+}
+
+.container_foto img {
+  width: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0.5;
+  -webkit-transition: all 4s ease;
+  -moz-transition: all 4s ease;
+  -o-transition: all 4s ease;
+  -ms-transition: all 4s ease;
+  transition: all 4s ease;
+}
+
+.ver_mas {
+  background-color: #FEB66C;
+  position: absolute;
+  width: 100%;
+  height: 70px;
+  bottom: 0;
+  z-index: 1;
+  opacity: 0;
+  transform: translate(0px, 70px);
+  -webkit-transform: translate(0px, 70px);
+  -moz-transform: translate(0px, 70px);
+  -o-transform: translate(0px, 70px);
+  -ms-transform: translate(0px, 70px);
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  -ms-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  padding: 5%;
+}
+
+.ver_mas span {
+  font-size: 40px;
+  color: #fff;
+  position: relative;
+  margin: 0 auto;
+  width: 100%;
+
+}
+
+
+/*hovers*/
+
+.container_foto:hover {
+  cursor: pointer;
+}
+
+.container_foto:hover img {
+  opacity: 0.2;
+  transform: scale(1.5);
+}
+
+.container_foto:hover article {
+  transform: translate(2px, -69px);
+  -webkit-transform: translate(2px, -69px);
+  -moz-transform: translate(2px, -69px);
+  -o-transform: translate(2px, -69px);
+  -ms-transform: translate(2px, -69px);
+}
+
+.container_foto:hover .ver_mas {
+  transform: translate(0px, 0px);
+  -webkit-transform: translate(0px, 0px);
+  -moz-transform: translate(0px, 0px);
+  -o-transform: translate(0px, 0px);
+  -ms-transform: translate(0px, 0px);
+  opacity: 1;
+}
+
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+</head>
+<body >
+
+	<div class="vista-principal-index" id="subir">
+	
+		<!-- HEADER -->
+		<header th:replace = "/fragments/header :: header"></header>		
+		<!-- FIN HEADER -->	
+		
+		<!-- TITULO PRINCIPAL -->
+			<tituloPrincipal th:replace= "/fragments/tituloPrincipal :: tituloPrincipal"></tituloPrincipal>
+		<!-- FIN TITULO PRINCIPAL -->
+		<div class="row p-3">
+		<div class="card container_foto">
+		<a sec:authorize="isAuthenticated()" class="stretched-link" th:href="@{/mascota/registroperdida/{id}(id=__${session.clientesession.id}__)}"></a>
+		<a sec:authorize="isAnonymous()"  class="stretched-link" href="/persona/registro"></a>
+         <div class="ver_mas text-center">
+         <a sec:authorize="isAuthenticated()" class="stretched-link" th:href="@{/mascota/registroperdida/{id}(id=__${session.clientesession.id}__)}"></a>
+         <a sec:authorize="isAnonymous()"  class="stretched-link" href="/persona/registro"></a>
+            <h4 style="text-shadow: 2px 2px 8px #000000; color: white;">Hace click y publicala aqui, es gratis!</h4>
+         </div>
+         <article class="text-left">
+            <h2 style="text-shadow: 2px 2px 8px #000000; color: white;">¿PERDISTE A TU MASCOTA?</h2>
+          </article>
+         <img src="/imagenes/missing.png" alt="">
+      </div>
+      <div class="card container_foto">
+      <a sec:authorize="isAuthenticated()" class="stretched-link" th:href="@{/mascota/registroencontrada/{id}(id=__${session.clientesession.id}__)}"></a>
+      <a sec:authorize="isAnonymous()"  class="stretched-link" href="/persona/registro"></a>
+         <div class="ver_mas text-center">
+          <a sec:authorize="isAuthenticated()" class="stretched-link" th:href="@{/mascota/registroencontrada/{id}(id=__${session.clientesession.id}__)}"></a>
+         <a sec:authorize="isAnonymous()"  class="stretched-link" href="/persona/registro"></a>
+           <h4 style="text-shadow: 2px 2px 8px #000000; color: white;">Hace click y publicala aqui!</h4>
+         </div>
+         <article class="text-left">
+            <h2 style="text-shadow: 2px 2px 8px #000000; color: white;">¿ENCONTRASTE UNA MASCOTA?</h2>
+         </article>
+         <img src="/imagenes/encontrado.png" alt="">
+      </div>
+      </div>
+      <div class="row p-3">
+		<div class="card container_foto">
+		 <a class="stretched-link" href="/mascota/listar"></a>
+		 <div class="ver_mas text-center">
+         <a class="stretched-link" href="/mascota/listar"></a>
+            <h4 style="text-shadow: 2px 2px 8px #000000; color: white;">Si encontraste una mascota, hace click aca y fijate si alguien la perdio</h4>
+         </div>
+         <article class="text-left">
+            <h2 style=" text-shadow: 2px 2px 8px #000000">MASCOTAS PERDIDAS</h2>
+          </article>
+         <img src="/imagenes/wanted.png" alt="">
+      </div>
+      <div class="card container_foto">
+      <a class="stretched-link" href="/mascota/listarE"></a>
+         <div class="ver_mas text-center">
+         <a class="stretched-link" href="/mascota/listarE"></a>
+           <h4 style="text-shadow: 2px 2px 8px #000000; color: white;">Hace click para buscar tu mascota</h4>
+         </div>
+         <article class="text-left">
+            <h2 style="text-shadow: 2px 2px 8px #000000; color: white;">MASCOTAS ENCONTRADAS</h2>
+         </article>
+         <img src="/imagenes/search.png" alt="">
+      </div>
+      </div>
+
+</div>
+      
+      
+
+	
+	
+		<!-- ULTIMAS MASCOTAS PERDIDAS -->
+		<mascotasInicio th:replace= "/fragments/mascotasInicio :: mascotasInicio"></mascotasInicio>
+		<!-- FIN ULTIMAS MASCOTAS ENCONTRADAS -->
+
+		<!---inicia sesion Modal --->
+			<modal class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title text-light" id="exampleModalLabel">Iniciar
+							sesion</h5>
+						<button type="" class="close rounded" data-dismiss="modal"
+							aria-label="Close">
+							<img src="/imagenes/cerrar.png" alt="">
+						</button>
+					</div>
+					<form action="/logincheck" method="POST">
+						<div class="modal-body">
+							<div class="form-floating mb-3">
+								<input type="email" class="form-control" id="floatingInput"
+									placeholder="name@example.com" name="mail"> <label
+									for="floatingInput">E-mail</label>
+							</div>
+							<div class="form-floating mb-3">
+								<input type="password" class="form-control"
+									id="floatingPassword" placeholder="Password" name="clave">
+								<label for="floatingPassword">Contraseña</label>
+							</div>
+						</div>
+
+						<div class="modal-footer">
+							<a type="submit" class="btn btn-warning" data-toggle="modal" data-target="#masInfo"
+							th:attr="data-target='#masInfo'+${persona}">Ingresar</a>
+							<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>							
+						</div>
+					
+		<!---Termina sesion Modal --->
+	<!-- saludo de bienvenida modal -->
+		
+    <div class="modal fade"   th:id="masInfo+${sesion}" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true" >
+<div class="modal-dialog modal-dialog-centered"  role="document" >
+<div class="modal-content" style="height:50vh;">
+<div class="modal-header">
+<h4 class="modal-title text-white" id="exampleModalLabel">Bienvenido a mascotas perdidas</h4>
+<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+  <span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body text-white"  >
+  Te ayudaremos a encontrar tu mascota
+  
+                    <h2 class="bi d-block mx-auto mb-1 " th:text="${clientesession?.nombre}">HOLIS</h2>
+                   
+</div>
+<div class="modal-footer">
+<button type="submit" class="btn btn-warning" data-toggle="modal" data-target="#masInfo"
+							th:attr="data-target='#masInfo'+${1234}">cerrar</button>
+</div>
+</div>
+</div>
+</div>
+</form>
+				</div>
+			</div>
+		</modal>	
+		<!---TERMINA SALUDO --->
+
+		
+
+	<!-- Inicia Carousel -->
+	
+
+		<div id="carouselExampleIndicators" class="carousel slide"
+			data-bs-ride="carousel">
+			<h2 class="carousel-text">Reencuentros felices</h2>
+			<ol class="carousel-indicators">
+				<li type="button" data-bs-target="#carouselExampleIndicators"
+					data-bs-slide-to="0" class="active" aria-current="true"
+					aria-label="Slide 1"></li>
+				<li type="button" data-bs-target="#carouselExampleIndicators"
+					data-bs-slide-to="1" aria-label="Slide 2"></li>
+				<li type="button" data-bs-target="#carouselExampleIndicators"
+					data-bs-slide-to="2" aria-label="Slide 3"></li>
+					<li type="button" data-bs-target="#carouselExampleIndicators"
+					data-bs-slide-to="3" aria-label="Slide 4"></li>
+					<li type="button" data-bs-target="#carouselExampleIndicators"
+					data-bs-slide-to="4" aria-label="Slide 5"></li>
+			</ol>
+			<div class="carousel-inner carousel">
+				<div class="carousel-item active">
+					<img src="/imagenes/carousel1.png" class="d-block w-100" alt="...">
+				</div>
+				<div class="carousel-item">
+					<img src="/imagenes/carousel2.png" class="d-block w-100" alt="...">
+				</div>
+				<div class="carousel-item">
+					<img src="/imagenes/carousel3.png" class="d-block w-100" alt="...">
+				</div>
+				<div class="carousel-item">
+					<img src="./imagenes/carousel4.png" class="d-block w-100" alt="...">
+				</div>
+				<div class="carousel-item">
+					<img src="./imagenes/carousel.png" class="d-block w-100" alt="...">
+				</div>
+			</div>
+			<button class="carousel-control-prev" type="button"
+				data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+				<img src="/imagenes/previous.png" alt=""> <span
+					class="visually-hidden ml-1">Previous</span>
+			</button>
+			<button class="carousel-control-next mr-10" type="button"
+				data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+				<img src="/imagenes/next-button.png" alt=""> <span
+					class="visually-hidden mr-10">Next</span>
+			</button>
+		
+		<!-- Fin Carousel -->
+	
+
+	</div>
+	<footer th:replace= "/fragments/footer :: footer"></footer>
+	<div class="subir " >
+      <a href="#subir" class="subir">
+      <img src="./imagenes/up.png" alt="subir" ></a>
+	</div>
+	<script src="index.js"></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+		crossorigin="anonymous">
+    </script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+		integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+		crossorigin="anonymous">
+    </script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+		integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+		crossorigin="anonymous"></script>
+	<script src="./js/wow.min.js">
+    </script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+		integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+		integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+		crossorigin="anonymous"></script>
+</body>
+
+</html>

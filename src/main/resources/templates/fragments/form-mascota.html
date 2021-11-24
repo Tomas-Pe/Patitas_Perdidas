@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/form-mascota.css">
+    <link href="/form.css" rel="stylesheet">
+</head>
+<!-- Formulario -->
+
+<div id="formulario" class="card w-50 mt-1 mb-1" style="margin: 0 auto;width:70%!important;">
+    <div class="row mb-4">
+        <div class="col">
+            <div class="form">
+
+                <!-- Titulo del formulario de Mascotas Encontradas -->
+                <h2 th:if="${encontrada}">Formulario de mascota encontrada</h2>
+
+                <!-- Titulo del formulario de Mascotas Perdidas -->
+                <h2 th:if="${perdida}">Formulario de mascota perdida</h2>
+
+                <!-- Formulario de Mascotas Encontradas -->
+                <form th:if="${encontrada}"
+                    th:action="@{/mascota/registroencontrada/{id}(id=${session.clientesession.id})}" method="POST"
+                    enctype="multipart/form-data" class="form">
+                    <div class="row" style="display: flex">
+					<div class="col d-flex align-items-center">
+					<div class="card flex m-4" id="filediv" style="width: 25rem;">
+					  <div class="imgs" id="preview">
+					  	
+					  <img alt="" class="card-img-top p-2">
+					   </div>
+					  <div class="card-body text-center">
+					  <p class="card-text text-light"><span><img alt="" src="/imagenes/camera.png" width="32px" height="32px">Agregue aqui la foto de su mascota</span></p>
+					   <input type="file" class="form-control-file" name="archivo" id="foto" accept="image/jpeg"
+                            th:value="${foto}" required="required">				  
+                            
+                      </div>
+					</div>
+					
+					</div>
+					<div class="col pt-3">
+
+                    <!-- Nombre -->
+                    <div class="form-group">
+                        <input type="hidden" class="form-control" name="nombre" id="nombre" placeholder="Nombre"
+                            value="Mascota encontrada">
+                    </div>
+                    <!-- FIN Nombre -->
+
+                    <!-- Descripcion -->
+                    <div class="form-group">
+                        <label ><span class="required">*</span>Descripción</label>
+                        <textarea placeholder="Comente la descripcion de la mascota" class="form-control" name="descripcion" id="descripcion" rows=3 required></textarea>
+                    </div>
+                    <!-- FIN Descripcion -->
+
+                    <!-- Especie -->
+                    <div class="form-group">
+                        <label for="especie"><span class="required">*</span>Especie</label>
+                        <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="especie"
+                            id="especie" th:value="${especie}" required>
+                            <option selected value="">Seleccione la especie de su mascota</option>
+                            <option value="Gato">Gato</option>
+                            <option value="Perro">Perro</option>
+                            <option value="Otro">Otro</option>
+                        </select>
+                    </div>
+                    <!-- FIN Especie -->
+
+                    <!-- Raza -->
+                    <div class="form-group">
+                        <label for="raza"><span class="required">*</span>Raza</label> <input type="text"
+                            class="form-control" name="raza" placeholder="Raza" required>
+                    </div>
+                    <!-- FIN Raza -->
+
+                    <!-- Color -->
+                    <div class="form-group">
+                        <label for="color"><span class="required">*</span>Color</label>
+                        <input type="text" class="form-control" name="color" id="color" placeholder="Color" th:value="${color}" required>
+                    </div>
+                    <!-- FIN Color -->
+
+                    <!-- Tamaño -->
+                    <div class="form-group">
+                        <label for="tamaño"><span class="required">*</span>Tamaño
+                            de la mascota</label> <select class="form-select form-select-sm"
+                            aria-label=".form-select-sm example" name="tamanio" th:value="${tamanio}" required>
+                            <option selected style="color: dimgray" value="">Seleccione
+                                el tamaño de su mascota</option>
+                            <option value="Pequeño" class="select">Pequeño</option>
+                            <option value="Mediano" class="select">Mediano</option>
+                            <option value="Grande" class="select">Grande</option>
+                        </select>
+                    </div>
+                    <!-- FIN Tamaño -->
+
+                    <!-- Zona -->
+                    <div class="fecha ui-widget">
+                        <label class="control-label"><span class="required">*</span>Barrio</label>
+                        <input class="form-control" name="zona" type="text" id="tags" th:value="${zona}" placeholder="Ingrese el barrio" required>
+                    </div>
+                    <!-- FIN Zona -->
+
+                    <!-- fecha -->
+                    <div class="form-group">
+                        <label class="control-label"><span class="required">*</span>Fecha en que se encontro</label>
+                        <input class="form-control" name="fecha" type="text" id="datepicker" th:value="${fecha}" required>
+                    </div>
+                    <!-- FIN fecha -->
+
+                    <!-- Encontrado -->
+                    <div class="form-group">
+                        <input type="hidden" id="encontrado" name="encontrado" value=true>
+                    </div>
+                    <!-- FIN Encontrado -->
+                    </div>
+                    </div>
+
+                    <!-- Botones -->
+                    <div class="form-group mt-2">
+                        <div>
+                            <button type="submit" class="btn btn-primary">
+                                <strong>Añadir mascota</strong>
+                            </button>
+                            <button type="Reset" class="btn btn-danger">
+                                <strong>Limpiar formulario</strong>
+                            </button>
+                            <br></br>
+                            <div class="alert alert-success" role="alert" th:text="${exito}" th:if="${exito}"></div>
+                            <!-- 				https://knasmueller.net/how-to-set-a-flash-message-in-spring-boot-with-thymeleaf -->
+                            <!-- https://programandoointentandolo.com/2019/03/spring-boot-validacion-spring-mvc-y-thymeleaf.html -->
+                            <div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
+                        </div>
+                    </div>
+                    <!-- FIN Botones -->
+                </form>
+                <!-- FIN Formulario de Mascotas Encontradas -->
+
+                <!-- Formulario de Mascotas Perdidas-->
+                <form th:if="${perdida}"
+                    th:action="@{/mascota/registroperdida/{id}(id=${session.clientesession.id})}" method="POST"
+                    enctype="multipart/form-data" class="form">
+                    <div class="row" style="display: flex">
+					<div class="col d-flex align-items-center">
+					<div class="card flex m-4" id="filediv" style="width: 25rem;">
+					  <div class="imgs" id="preview">
+					  	
+					  <img alt="" class="card-img-top p-2">
+					   </div>
+					  <div class="card-body text-center">
+					  <p class="card-text text-light"><span><img alt="" src="/imagenes/camera.png" width="32px" height="32px">Agregue aqui la foto de su mascota</span></p>
+					   <input type="file" class="form-control-file" name="archivo" id="foto" accept="image/jpeg"
+                            th:value="${foto}">
+					  </div>
+					</div>
+					
+					</div>
+					<div class="col pt-3">
+
+                    <!-- Nombre -->
+                    <div class="form-group">
+                        <label for="nombre"><span class="required">*</span>Nombre de la mascota</label> <input
+                            type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre" th:value="${nombre}" required>
+                    </div>
+                    <!-- FIN Nombre -->
+
+                    <!-- Descripcion -->
+                    <div class="form-group">
+                        <label for="descripcion"><span class="required">*</span>Descripción</label>
+                        <textarea placeholder="Comente descripcion y detalles de su mascota" class="form-control" name="descripcion" id="descripcion" rows=3 th:value="${descripcion}" required></textarea>
+                    </div>
+                    <!-- FIN Descripcion -->
+
+                    <!-- Especie -->
+                    <div class="form-group">
+                        <label for="especie"><span class="required">*</span>Especie</label>
+                        <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="especie"
+                            id="especie" th:value="${especie}" required>
+                            <option value="" selected>Seleccione la especie de su mascota</option>
+                            <option value="Gato">Gato</option>
+                            <option value="Perro">Perro</option>
+                        </select>
+                    </div>
+                    <!-- FIN Especie -->
+
+                    <!-- Raza -->
+                    <div class="form-group">
+                        <label for="raza"><span class="required">*</span>Raza</label> <input type="text"
+                            class="form-control" name="raza" id="raza" placeholder="Raza" th:value="${raza}" required>
+                    </div>
+                    <!-- FIN Raza -->
+
+                    <!-- Color -->
+                    <div class="form-group">
+                        <label for="color"><span class="required">*</span>Color</label>
+                        <input type="text" class="form-control" name="color" id="color" placeholder="Color" th:value="${color}" required>
+                    </div>
+                    <!-- FIN Color -->
+
+                    <!-- Tamaño -->
+                    <div class="form-group">
+                        <label for="tamaño"><span class="required">*</span>Tamaño
+                            de la mascota</label> <select class="form-select form-select-sm"
+                            aria-label=".form-select-sm example" name="tamanio" th:value="${tamanio}" required>
+                            <option selected style="color: dimgray" value="">Seleccione
+                                el tamaño de su mascota</option>
+                            <option value="Pequeño" class="select">Pequeño</option>
+                            <option value="Mediano" class="select">Mediano</option>
+                            <option value="Grande" class="select">Grande</option>
+                        </select>
+                    </div>
+                    <!-- FIN Tamaño -->
+
+                    <!-- Zona -->
+                    <div class="fecha ui-widget">
+                        <label class="control-label"><span class="required">*</span>Barrio</label>
+                        <input class="form-control" name="zona" type="text" id="tags" th:value="${zona}" placeholder="Escriba el barrio"required>
+                    </div>
+                    <!-- FIN Zona -->
+
+                    <!-- Fecha -->
+                    <div class="fecha">
+                        <label class="control-label"><span class="required">*</span>Fecha en que se perdio</label>
+                        <input class="form-control" name="fecha" type="text" id="datepicker" th:value="${fecha}" required>
+                    </div>
+                    <!-- FIN Fecha -->
+
+                    <!-- Foto -->
+                   
+                    <!-- FIN Foto -->
+
+                    <!-- Encontrado -->
+                    <div class="form-group">
+                        <input type="hidden" id="encontrado" name="encontrado" value=false>
+                    </div>
+                    <!-- FIN Encontrado -->
+                    </div>
+                    </div>
+
+                    <!-- Botones -->
+                    <div class="form-group mt-2">
+                        <div>
+                        
+                            <button type="submit" class="btn btn-primary boton">
+                                Añadir mascota
+                            </button>
+                            <button type="Reset" class="btn btn-danger boton">
+                                Limpiar formulario
+                            </button>
+                            <br></br>
+                            <div class="alert alert-success" role="alert" th:text="${exito}" th:if="${exito}"></div>
+                            <!-- 				https://knasmueller.net/how-to-set-a-flash-message-in-spring-boot-with-thymeleaf -->
+                            <!-- https://programandoointentandolo.com/2019/03/spring-boot-validacion-spring-mvc-y-thymeleaf.html -->
+                            <div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
+                        </div>
+                    </div>
+                    <!-- FIN Botones -->
+
+                </form>
+                <!-- FIN Formulario de Mascotas Perdidas-->
+            </div>
+        </div>
+    </div>
+</div>
+
